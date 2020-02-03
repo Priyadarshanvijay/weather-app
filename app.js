@@ -1,20 +1,6 @@
 const request = require('request');
 const geocode = require('./utils/geocode');
-
-// const url = 'https://api.darksky.net/forecast/e8238bee77e7fb4522949c49b5488aad/37.8267,-122.4233?units=si&lang=hi';
-
-// request({url : url, json: true}, (error, response) => {
-//     if(error){
-//         console.log('Unable to connect to weather service!');
-//     }
-//     else if(response.body.error){
-//         console.log('Unable to find location');
-//     }
-//     else{
-//         const current = response.body.currently;
-//         console.log(`${response.body.daily.data[0].summary} It is currently ${current.temperature} degrees out. There is a ${current.precipProbability}% chance of rain.`);
-//     }
-// });
+const forecast = require('./utils/forecast');
 
 geocode('Boston', (error,data) => {
     if(error){
@@ -24,3 +10,8 @@ geocode('Boston', (error,data) => {
         console.log(`Location : ${data.location}\nLatitude: ${data.latitude}\nLongitude : ${data.longitude}`);
     }
 });
+
+forecast(-75.7088, 44.1545, (error, data) => {
+    console.log('Error', error)
+    console.log('Data', data)
+  })

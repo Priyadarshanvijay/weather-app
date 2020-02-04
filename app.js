@@ -5,15 +5,15 @@ let location = process.argv[2];
 
 if(location === undefined) return console.log('Please enter a location while calling the app!');
 
-geocode(location, (error,data) => {
+geocode(location, (error,{latitude, longitude, location}) => {
     if(error){
         return console.log(error); //stops the function
     }
-    forecast(data.latitude, data.longitude, (error, forecastData) => {
+    forecast(latitude, longitude, (error, {summary, temperature, chanceOfRain}) => {
         if(error){
             return console.log('Error', error);
         }
-        console.log(data.location);
-        console.log(`${forecastData.summary} It is currently ${forecastData.temperature} degress out. There is a ${forecastData.chanceOfRain}% chance of rain.`);
+        console.log(location);
+        console.log(`${summary} It is currently ${temperature} degress out. There is a ${chanceOfRain}% chance of rain.`);
     });
 });
